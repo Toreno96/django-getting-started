@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/django,python
-# Edit at https://www.gitignore.io/?templates=django,python
+# Created by https://www.gitignore.io/api/django,python,vim
+# Edit at https://www.gitignore.io/?templates=django,python,vim
 
 ### Django ###
 *.log
@@ -190,4 +190,23 @@ dmypy.json
 
 # Pyre type checker
 
-# End of https://www.gitignore.io/api/django,python
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+# End of https://www.gitignore.io/api/django,python,vim
