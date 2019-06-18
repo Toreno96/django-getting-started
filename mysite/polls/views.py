@@ -1,6 +1,7 @@
 import logging
 
 from django.http import HttpResponse
+from django.template import loader
 
 from polls.models import Question
 
@@ -8,8 +9,11 @@ from polls.models import Question
 def index(request, **kwargs):
     logging.getLogger('django.server').info(kwargs)
     latest_questions = Question.objects.order_by('-pub_date')[:5]
-    latest_questions = ', '.join([q.question_text for q in latest_questions])
-    return HttpResponse(latest_questions)
+    template = loader.get_template('polls/index.html')
+    context = {
+        'latest_questions': latest_questions,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def detail(request, question_id):
