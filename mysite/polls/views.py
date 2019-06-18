@@ -2,10 +2,14 @@ import logging
 
 from django.http import HttpResponse
 
+from polls.models import Question
+
 
 def index(request, **kwargs):
     logging.getLogger('django.server').info(kwargs)
-    return HttpResponse("Hello, world. You're at the polls index.")
+    latest_questions = Question.objects.order_by('-pub_date')[:5]
+    latest_questions = ', '.join([q.question_text for q in latest_questions])
+    return HttpResponse(latest_questions)
 
 
 def detail(request, question_id):
