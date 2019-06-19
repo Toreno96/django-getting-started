@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     # ex: /polls/
     path('', views.index, name='index'),
-    path('<int:question_id>/', include([
+    path('specifics/<int:question_id>/', include([
         # ex: /polls/5/
         path('', views.detail, name='detail'),
         # ex: /polls/5/results/
