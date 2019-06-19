@@ -100,3 +100,23 @@ class QuestionIndexViewTests(TestCase):
             response.context['latest_questions'],
             ['<Question: Past question 2.>', '<Question: Past question 1.>']
         )
+
+
+class QuestionDetailViewTests(TestCase):
+    def test_past_question(self):
+        """
+        The detail view of a question with a pub_date in the past
+        displays the question's text.
+        """
+        question = create_question(question_text="Past question.", days=-30)
+        response = self.client.get(reverse('polls:detail', args=(question.id,)))
+        self.assertContains(response, question.question_text)
+
+    def test_future_question(self):
+        """
+        The detail view of a question with a pub_date in the future
+        returns a 404 not found.
+        """
+        question = create_question(question_text="Future question.", days=30)
+        response = self.client.get(reverse('polls:detail', args=(question.id,)))
+        self.assertEqual(response.status_code, 404)
