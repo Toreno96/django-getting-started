@@ -4,13 +4,16 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.db.models import F
+from django.utils import timezone
 
 from .models import Choice, Question
 
 
 def index(request, **kwargs):
     logging.getLogger('django.server').info(kwargs)
-    latest_questions = Question.objects.order_by('-pub_date')[:5]
+    latest_questions = Question.objects.filter(
+        pub_date__lte=timezone.now()
+    ).order_by('-pub_date')[:5]
     context = {
         'latest_questions': latest_questions,
     }
