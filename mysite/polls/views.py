@@ -3,7 +3,7 @@ import logging
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from polls.models import Question
+from .models import Question
 
 
 def index(request, **kwargs):
